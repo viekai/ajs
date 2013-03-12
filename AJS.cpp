@@ -15,15 +15,26 @@
  * =====================================================================================
  */
 #include <iostream>
+#include <string>
+#include "CodeStream.h"
 
 using namespace std;
 
 int main(int argc, char** argv)
 {
+    if(argc < 2)
+    {
+        cout << "usage: ajs filename" << endl;
+        return 1;
+    }
+
     cout << "----------------------------------" << endl;    
     cout << "this is a javascript vm for fun" << endl;
-    cout << "----------------------------------"<< endl;    
+    cout << "----------------------------------"<< endl;
 
-    
+    AJS::CodeStream codeStream;
+
+    codeStream.readFile(argv[1]);
+
     return 0;
 }
