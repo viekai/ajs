@@ -33,6 +33,7 @@ namespace AJS
         int length = fin.tellg();
         fin.seekg(0, fin.beg);
 
+        m_size = length;
         m_buffer = (char*)malloc(length);
 
         fin.get(m_buffer, length);

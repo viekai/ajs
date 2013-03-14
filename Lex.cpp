@@ -14,6 +14,14 @@
  *
  * =====================================================================================
  */
-#include <stdlib.h>
+#include "CodeStream.h"
+#include "Lex.h"
 
+namespace AJS
+{
+    void Lex::parse()
+    {
+    
+    }    
 
+}

@@ -17,24 +17,31 @@
 #include <iostream>
 #include <string>
 #include "CodeStream.h"
-
-using namespace std;
+#include "Lex.h"
 
 int main(int argc, char** argv)
 {
     if(argc < 2)
     {
-        cout << "usage: ajs filename" << endl;
+        std::cout << "usage: ajs filename" << std::endl;
         return 1;
     }
 
-    cout << "----------------------------------" << endl;    
-    cout << "this is a javascript vm for fun" << endl;
-    cout << "----------------------------------"<< endl;
+    std::cout << "----------------------------------" << std::endl;    
+    std::cout << "this is a javascript vm for fun" << std::endl;
+    std::cout << "----------------------------------"<< std::endl;
 
     AJS::CodeStream codeStream;
 
-    codeStream.readFile(argv[1]);
+    if(!codeStream.readFile(argv[1]))
+    {
+        return 1;
+    }
+
+        
+    AJS::Lex lex(codeStream);
+    lex.parse();
 
     return 0;
 }
+
