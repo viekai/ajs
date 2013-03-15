@@ -15,9 +15,33 @@
  * =====================================================================================
  */
 #include <iostream>
-#include <string>
-#include "CodeStream.h"
+#include <fstream>
+#include <stdlib.h>
+
 #include "Lex.h"
+#include "AJS.h"
+
+bool readFile(const char* fileName, char** buffer, int* size)
+{
+    std::ifstream fin;
+    fin.open(fileName, std::ifstream::in);
+
+    if(!fin)
+        return false;
+
+    fin.seekg(0, fin.end);
+    int length = fin.tellg();
+    fin.seekg(0, fin.beg);
+
+    *size = length;
+    *buffer = (char*)malloc(length);
+
+    fin.get(*buffer, length);
+#if DEBUG
+    std::cout << *buffer << std::endl;
+#endif
+    fin.close();
+}
 
 int main(int argc, char** argv)
 {
@@ -30,16 +54,12 @@ int main(int argc, char** argv)
     std::cout << "----------------------------------" << std::endl;    
     std::cout << "this is a javascript vm for fun" << std::endl;
     std::cout << "----------------------------------"<< std::endl;
+    
+	int size;
+	char* buffer;
+	readFile(argv[1], &buffer, &size);
 
-    AJS::CodeStream codeStream;
-
-    if(!codeStream.readFile(argv[1]))
-    {
-        return 1;
-    }
-
-        
-    AJS::Lex lex(codeStream);
+    AJS::Lex lex(buffer, size);
     lex.parse();
 
     return 0;
