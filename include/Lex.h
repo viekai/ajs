@@ -76,6 +76,10 @@ struct JSToken
     JSTokenInfo info;
 };
 
+class Identifier
+{
+
+};
 
 //----------------------------------------
 class Lex
@@ -110,6 +114,10 @@ private:
 
     void parseToken();
 
+	void parseIdentifier();
+
+	Identifier* makeIdentifier(char* identifierStart, uint32_t identifierLength);
+
     inline bool isLineTerminator(int ch)
     {
         return ch == '\r' || ch == '\n' || (ch & ~1) == 0x2028;
@@ -122,6 +130,8 @@ private:
     }
 
 };
+
+
     
 }
 
