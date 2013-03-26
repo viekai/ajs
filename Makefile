@@ -1,6 +1,12 @@
-all: clean ajs
+TARGET := ajs
+INCLUDEDIR := ./include/ 
+SRC := $(wildcard src/*.cpp)
+CFLAGS := -g -O0
 
-ajs:	
-	g++ -o ajs AJS.cpp AJS.h Lex.cpp Lex.h -g
+all: $(TARGET) 
+
+$(TARGET) : $(SRC)	
+	g++ $(CFLAGS) -I $(INCLUDEDIR) $(SRC) -o $@ 
+
 clean:
 	rm -rf ajs *.o

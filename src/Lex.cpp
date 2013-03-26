@@ -263,7 +263,6 @@ void Lex::shiftLine()
 
 void Lex::parse()
 {
-    
 }    
 
 void Lex::parseToken()
@@ -275,6 +274,7 @@ void Lex::parseToken()
     shift1();
     if(UNLIKELY(m_current == -1))
         return;
+
     ASSERT(isascii(m_current));
 
     CharacterType type =  static_cast<CharacterType>(typesOfASCIICharacters[m_current]);
