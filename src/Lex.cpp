@@ -284,10 +284,9 @@ void Lex::parseIdentifier()
     while(isIdentifier(m_current))
         shift1();
 
-    uint32_t identifierLength = (uint32_t)m_current - (uint32_t)identifierStart;
-    
-    Identifier* ident = makeIdentifier(identifierStart, identifierLength);
+    uint32_t identifierLength = m_buffer - identifierStart;
 
+    Identifier* ident = makeIdentifier(identifierStart, identifierLength);
 }
 
 void Lex::parseToken()
