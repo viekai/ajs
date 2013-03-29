@@ -263,7 +263,32 @@ void Lex::shiftLine()
 
 void Lex::parse()
 {
+    
 }    
+
+static bool isIdentifier(int ch)
+{
+    ASSERT(isascii(ch));
+    return (typesOfASCIICharacters[ch] <= TypeNumber);
+}
+
+Identifier* Lex::makeIdentifier(char* identifierStart, uint32_t identifierLength)
+{
+	return NULL;
+}
+
+void Lex::parseIdentifier()
+{
+    char* identifierStart = m_buffer;
+
+    while(isIdentifier(m_current))
+        shift1();
+
+    uint32_t identifierLength = (uint32_t)m_current - (uint32_t)identifierStart;
+    
+    Identifier* ident = makeIdentifier(identifierStart, identifierLength);
+
+}
 
 void Lex::parseToken()
 {
@@ -274,7 +299,6 @@ void Lex::parseToken()
     shift1();
     if(UNLIKELY(m_current == -1))
         return;
-
     ASSERT(isascii(m_current));
 
     CharacterType type =  static_cast<CharacterType>(typesOfASCIICharacters[m_current]);
