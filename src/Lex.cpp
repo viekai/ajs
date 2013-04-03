@@ -268,7 +268,7 @@ void Lex::parse()
 
 static bool isIdentifier(int ch)
 {
-    ASSERT(isascii(ch));
+    ASSERT(isASCII(ch));
     return (typesOfASCIICharacters[ch] <= TypeNumber);
 }
 
@@ -298,7 +298,7 @@ void Lex::parseToken()
     shift1();
     if(UNLIKELY(m_current == -1))
         return;
-    ASSERT(isascii(m_current));
+    ASSERT(isASCII(m_current));
 
     CharacterType type =  static_cast<CharacterType>(typesOfASCIICharacters[m_current]);
 

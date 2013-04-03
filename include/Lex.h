@@ -16,7 +16,7 @@
  */
 
 #include "AJS.h"
-#include <ctype.h>
+#include "AsciicType.h"
 
 namespace AJS
 {
@@ -125,7 +125,7 @@ private:
 
     inline bool isWhiteSpace(int ch)
     {
-        ASSERT(isascii(ch));
+        ASSERT(isASCII(ch));
         return (ch == ' ' || ch == '\t' || ch == 0xB || ch == 0xC);
     }
 
