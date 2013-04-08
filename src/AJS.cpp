@@ -43,10 +43,33 @@ bool readFile(const char* fileName, char** buffer, int* size)
     fin.close();
 }
 
+#define TEST 1
+
+#if TEST
+#include "Hash.h"
+
+static void test()
+{
+    st_index_t size = static_cast<st_index_t>(10);
+    HashTable table(&strhash, &strcompare, size);
+    const char* a = "111";
+    const char* b = "222";
+    st_data_t c = reinterpret_cast<st_data_t>(a);
+    st_data_t d = reinterpret_cast<st_data_t>(b);
+    table.insert(c , d);
+    char* str = reinterpret_cast<char*>(table.lookup(c));
+    printf("%s\n" , str);
+        
+}
+#endif
+
 int main(int argc, char** argv)
 {
     if(argc < 2)
     {
+#if TEST
+    test();
+#endif
         std::cout << "usage: ajs filename" << std::endl;
         return 1;
     }
